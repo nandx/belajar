@@ -40,4 +40,12 @@ public class KaryawanService {
 		return karyawanRepository.listNamaKaryawan();
 	}
 
+	public void save(Karyawan karyawan) {
+		karyawanRepository.save(karyawan);
+	}
+
+	public void delete(Karyawan karyawan) {
+		karyawanRepository.delete(karyawan);
+	}
+
 }

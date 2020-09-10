@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	Edit Karyawan
+	<br>
+	<form th:action="@{/karyawan/edit}" method="post"
+		th:object="${employee}">
+		<table>
+			<tr>
+				<td>ID</td>
+				<td><input type="hidden" th:field="*{id}"></td>
+			</tr>
+			<tr>
+				<td>Nama</td>
+				<td><input type="text" th:field="*{namakaryawan}"></td>
+			</tr>
+			<tr>
+				<td>Alamat</td>
+				<td><input type="text" th:field="*{alamat}"></td>
+			</tr>
+
+			<tr>
+				<td>
+					<button type="submit">Simpan</button>
+				</td>
+				<td><a th:href="@{/karyawan}">Back</a></td>
+
+			</tr>
+
+		</table>
+	</form>
+
+</body>
+</html>
