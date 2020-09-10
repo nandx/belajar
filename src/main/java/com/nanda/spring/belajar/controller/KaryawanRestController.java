@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nanda.spring.belajar.entity.Karyawan;
@@ -27,15 +28,17 @@ public class KaryawanRestController {
 		return new ResponseEntity<List<Karyawan>>(list, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/rest/karyawan/ubahnama", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Karyawan>> ubahnama() {
-		Karyawan karyawan = karyawanService.getKaryawan((long) 1);
-		karyawan.setNamakaryawan("nama baru");
-		karyawanService.saveApaAja(karyawan);
-
-		Page<Karyawan> page = karyawanService.listAllKaryawan();
+	@RequestMapping(value = "/rest/karyawan/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Karyawan>> search(@RequestParam(name = "keyword", required = false) String paramnama) {
+		Page<Karyawan> page = karyawanService.searchKaryawan(paramnama);
 		List<Karyawan> list = page.getContent();
 		return new ResponseEntity<List<Karyawan>>(list, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/rest/karyawan/listnama", method = RequestMethod.GET)
+	public ResponseEntity<List<String>> listnama() {
+		List<String> list = karyawanService.listNamaKaryawan();
+		return new ResponseEntity<List<String>>(list, HttpStatus.OK);
 	}
 
 }
